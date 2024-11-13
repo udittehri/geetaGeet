@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CatFactServiceService } from '../../services/cat-fact-service.service';
 
 @Component({
   selector: 'app-cat-fact',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './cat-fact.component.css'
 })
 export class CatFactComponent {
+  catFactService = inject(CatFactServiceService)
+
+  catFact :any = {};
+  async ngOnInit() {
+    this.catFact = await this.catFactService.getCatFact();
+  }
+  
 
 }
